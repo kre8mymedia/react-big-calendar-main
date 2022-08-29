@@ -3,7 +3,7 @@ export const reformatEvents = (events) => {
     var newObj = {};
     newObj["_id"] = event._id;
     newObj["title"] = event.title;
-    newObj["bgColor"] = event.bgColor;
+    newObj["bgColor"] = event.project ? event.project.color : event.bgColor;
     newObj["description"] = event.description;
     newObj["hours"] = event.hours;
     newObj["start"] = new Date(
