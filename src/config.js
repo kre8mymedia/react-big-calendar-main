@@ -1,0 +1,2 @@
+export const access_token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwODYxZDVmOTRmNWQwNjc5ZmNlMmUiLCJlbWFpbCI6Imdsb290aWVAZ21haWwuY29tIiwiaWF0IjoxNjYxNzk3OTE1LCJleHAiOjE2NjE4MDUxMTV9.Dd0tg2tIelnN8okWX8loLMFf9aw1tBjeFUEDYaznEqQ";
