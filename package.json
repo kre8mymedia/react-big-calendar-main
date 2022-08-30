@@ -19,7 +19,9 @@
     "react": "16.8.6",
     "react-big-calendar-like-google": "0.0.3",
     "react-dom": "16.8.6",
-    "react-icons": "4.4.0"
+    "react-icons": "4.4.0",
+    "sass": "^1.54.6",
+    "sass-loader": "^13.0.2"
   },
   "devDependencies": {
     "@types/node-sass": "3.10.32",
