@@ -13,6 +13,7 @@ const ProjectProvider = ({ children }) => {
 	const [formType, setFormType] = React.useState("");
 	const [projects, setProjects] = React.useState([]);
 	const [project, setProject] = React.useState({
+		_id: '',
 		name: "",
 		color: "",
 	});
@@ -64,9 +65,7 @@ const ProjectProvider = ({ children }) => {
 
 	const init = async () => {
 		try {
-			const items = await fetchProjects(null, {
-				headers: { 'Authorization': `Bearer ${token}` },
-			});
+			const items = await fetchProjects(null, {headers: {"Authorization": `Bearer ${localStorage.getItem('token')}`}});
 			console.log("ProjectContext.init: ", items);
 			setProjects(items.projects);
 		} catch (e) {

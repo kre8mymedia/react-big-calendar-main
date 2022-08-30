@@ -1,3 +1,4 @@
+import "../../index.scss";
 import React from "react";
 import {
   DialogTitle,
@@ -8,7 +9,7 @@ import {
   Grid,
   Button
 } from "@material-ui/core";
-import "../../index.scss";
+import SelectProject from '../fields/SelectProject';
 
 import { useEventContext } from "../../contexts/EventContext";
 
@@ -56,6 +57,9 @@ export default function AddEventForm() {
           This modal is used for creating new calendar events.
         </DialogContentText>
         <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <SelectProject />
+          </Grid>
           <Grid item xs={12}>
             <TextField
               autoFocus
