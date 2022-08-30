@@ -69,3 +69,19 @@ export async function deleteEvent(id, headers = null) {
     throw new Error(e);
   }
 }
+
+/**-------------------------------------------------------------------------------
+ * Project Routes
+ * 
+ * -------------------------------------------------------------------------------
+ */
+ export async function fetchProjects() {
+  try {
+    const res = await axios.get(`${HOST}/api/v1/projects`, headers);
+    const data = res.data;
+    console.log("api.fetchProjects: ", data);
+    return data;
+  } catch(e) {
+    throw new Error(e);
+  }
+}

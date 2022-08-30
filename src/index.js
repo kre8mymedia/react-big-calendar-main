@@ -3,14 +3,17 @@ import React, { Component } from "react";
 import Home from "./pages/Home";
 import EventProvider from "./contexts/EventContext";
 import AuthProvider from "./contexts/AuthContext";
+import ProjectProvider from "./contexts/ProjectContext";
 
 class App extends Component {
   render() {
     return (
       <AuthProvider>
-        <EventProvider>
-          <Home />
-        </EventProvider>
+        <ProjectProvider>
+          <EventProvider>
+            <Home />
+          </EventProvider>
+        </ProjectProvider>
       </AuthProvider>
     );
   }

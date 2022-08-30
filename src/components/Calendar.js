@@ -6,6 +6,10 @@ import moment from "moment";
 // Components
 import BigCalendar from "react-big-calendar-like-google";
 import EventModal from "../components/modals/EventModal";
+import ProjectModal from "../components/modals/ProjectModal";
+import {
+  Grid,
+} from "@material-ui/core";
 // Contexts
 import { useEventContext } from "../contexts/EventContext";
 import { useAuthContext } from "../contexts/AuthContext";
@@ -19,14 +23,17 @@ export default function Calender() {
 
   return (
     <div>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col p-2">
-            <EventModal />
-            <button onClick={() => setToken('')} style={{ position: "absolute", right: 10, top: 10 }}>Logout</button>
-          </div>
-        </div>
-      </div>
+      <Grid container spacing={1}>
+        <Grid item>
+          <EventModal />
+        </Grid>
+        <Grid item>
+          <ProjectModal />
+        </Grid>
+        <Grid item>
+          <button onClick={() => setToken('')} style={{ position: "absolute", right: 10, top: 10 }}>Logout</button>
+        </Grid>
+      </Grid>
       <BigCalendar
         popup
         selectable
