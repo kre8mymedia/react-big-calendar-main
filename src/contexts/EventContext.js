@@ -12,11 +12,13 @@ import {
   reformatEvents
 } from "../utils/format";
 import { useAuthContext } from "../contexts/AuthContext";
+import { useProjectContext } from "../contexts/ProjectContext";
 
 export const EventContext = React.createContext();
 
 const EventProvider = ({ children }) => {
   const { token } = useAuthContext();
+  const { project, setProject } = useProjectContext();
   const [events, setEvents] = React.useState([]);
   const [selectedEvent, setSelectedEvent] = React.useState({
     _id: "",
@@ -60,13 +62,18 @@ const EventProvider = ({ children }) => {
 
   const handleClose = () => {
     setFormType("");
+    setProject({
+      _id: '',
+      name: '',
+      color: '',
+    });
     setSelectedEvent(null);
     setOpen(false);
   };
 
   const saveEvent = async (data) => {
     const adjustPayload = fixDatesAsTimestamps(data);
-    const newEvent = await createEvent({ ...adjustPayload, ...data }, {headers: {"Authorization": `Bearer ${token}`}});
+    const newEvent = await createEvent({ ...adjustPayload, ...data, project: project._id }, {headers: {"Authorization": `Bearer ${token}`}});
     if (newEvent.success) {
       init();
     }
@@ -96,7 +103,7 @@ const EventProvider = ({ children }) => {
     try {
       const events = await fetchEvents(null, {headers: {"Authorization": `Bearer ${token}`}});
       const newItems = reformatEvents(events);
-      console.log("init: ", newItems);
+      console.log("EventContext.init: ", newItems);
       setEvents(newItems);
     } catch (e) {
       // alert(e);

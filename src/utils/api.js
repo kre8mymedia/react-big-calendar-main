@@ -1,10 +1,10 @@
 import axios from "axios";
 // import { access_token } from "../config";
 
-const APP_ENV = "production";
+const APP_ENV = "development";
 const HOST =
   APP_ENV === "development"
-    ? "https://e16c-99-36-3-176.ngrok.io"
+    ? "https://1dde-99-36-3-176.ngrok.io"
     : "https://ts-dev-api.glootie.ml";
 
 // axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
@@ -68,4 +68,27 @@ export async function deleteEvent(id, headers = null) {
   } catch(e) {
     throw new Error(e);
   }
+}
+
+/**-------------------------------------------------------------------------------
+ * Project Routes
+ * 
+ * -------------------------------------------------------------------------------
+ */
+ export async function fetchProjects(query = null, headers = null) {
+  try {
+    const res = await axios.get(`${HOST}/api/v1/projects`, headers);
+    const data = res.data;
+    console.log("api.fetchProjects: ", data);
+    return data;
+  } catch(e) {
+    throw new Error(e);
+  }
+}
+
+export async function createProject(projectInput, headers = null) {
+  const res = await axios.post(`${HOST}/api/v1/projects`, projectInput, headers);
+  const project = res.data;
+  console.log("createProject: ", project);
+  return project;
 }
