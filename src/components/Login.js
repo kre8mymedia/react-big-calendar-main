@@ -8,37 +8,41 @@ import {
   } from "@material-ui/core";
 
 export default function Login() {
-    const { setToken } = useAuthContext();
-
-    const [input, setInput] = React.useState('');
-
-    function handleSubmit() {
-        setToken(input);
-        setInput('');
-    }
+    const { setEmail, setPassword, submitLoginForm } = useAuthContext();
 
 	return (
 		<div>
             <div style={{ textAlign: "center", marginTop: "20px" }}>
                 <h1>Welcome to the React Big Calendar Demo</h1>
             </div>
-            <Grid container spacing={2} style={{ marginTop: "20px" }}>
+            <Grid container spacing={2} style={{ padding: "400px" }}>
                 <Grid item xs={12}>
                     <TextField
                         fullWidth  
-                        label="Enter Token" 
+                        label="Email" 
                         variant="outlined"
-                        type="text" 
-                        onChange={(e) => setInput(e.target.value)}
-                        value={input}
+                        placeholder="Enter email..."
+                        type="email" 
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        fullWidth  
+                        label="Password" 
+                        variant="outlined"
+                        placeholder="Enter password..."
+                        type="password" 
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                     
                 </Grid>
                 <Grid item xs={8}>
-                    <p>Get token from <b>GET /api/v1/login</b> -&gt; <a target="_blank" href="https://ts-dev-api.glootie.ml/docs">API Docs</a></p>
+                    <p>Register user at <b>POST /api/v1/register</b> -&gt; <a target="_blank" href="https://ts-dev-api.glootie.ml/docs">API Docs</a></p>
                 </Grid>
                 <Grid item xs={4}>
-                    <Button variant="contained" className="m-3" style={{ float: 'right', backgroundColor: "green" }} color="primary" onClick={handleSubmit}>Submit</Button>
+                    <Button variant="contained" className="m-3" style={{ float: 'right', backgroundColor: "green" }} color="primary" onClick={submitLoginForm}>Submit</Button>
                 </Grid>
             </Grid>
 		</div>
