@@ -62,6 +62,7 @@ export default function AddEventForm() {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              placeholder="Enter event title"
               autoFocus
               id="name"
               label="Title"

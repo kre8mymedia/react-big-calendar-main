@@ -30,6 +30,7 @@ const ProjectProvider = ({ children }) => {
 	const handleClose = () => {
 		setFormType("");
 		setProject({
+			_id: "",
             name: "",
             color: "",
         });

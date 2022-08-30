@@ -29,7 +29,13 @@ export default function SelectProject() {
             value={project}
             onChange={handleChange}
             renderValue={() => {
-                if (project._id === "" || project === "" || project === null) {
+                if (
+                    project._id === "" || 
+                    project === "" || 
+                    project === null &&
+                    project.name === "" &&
+                    project.color === ""
+                ) {
                     return <em>Select Project</em>
                 } else {
                     return <em>{project.name}</em>

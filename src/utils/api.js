@@ -1,7 +1,7 @@
 import axios from "axios";
 // import { access_token } from "../config";
 
-const APP_ENV = "production";
+const APP_ENV = "development";
 const HOST =
   APP_ENV === "development"
     ? "https://1dde-99-36-3-176.ngrok.io"
