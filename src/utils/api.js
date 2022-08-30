@@ -1,10 +1,10 @@
 import axios from "axios";
 // import { access_token } from "../config";
 
-const APP_ENV = "production";
+const APP_ENV = "development";
 const HOST =
   APP_ENV === "development"
-    ? "https://e16c-99-36-3-176.ngrok.io"
+    ? "https://4caa-99-36-3-176.ngrok.io"
     : "https://ts-dev-api.glootie.ml";
 
 // axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
