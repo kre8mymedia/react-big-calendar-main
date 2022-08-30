@@ -8,12 +8,14 @@ import BigCalendar from "react-big-calendar-like-google";
 import EventModal from "../components/modals/EventModal";
 // Contexts
 import { useEventContext } from "../contexts/EventContext";
+import { useAuthContext } from "../contexts/AuthContext";
 
 moment.locale("en");
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 export default function Calender() {
   const { events, handleClickOpen } = useEventContext();
+  const { setToken } = useAuthContext();
 
   return (
     <div>
@@ -21,6 +23,7 @@ export default function Calender() {
         <div className="row">
           <div className="col p-2">
             <EventModal />
+            <button onClick={() => setToken('')} style={{ position: "absolute", right: 10, top: 10 }}>Logout</button>
           </div>
         </div>
       </div>

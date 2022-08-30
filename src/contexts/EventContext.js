@@ -11,10 +11,12 @@ import {
   fixDatesAsIso,
   reformatEvents
 } from "../utils/format";
+import { useAuthContext } from "../contexts/AuthContext";
 
 export const EventContext = React.createContext();
 
 const EventProvider = ({ children }) => {
+  const { token } = useAuthContext();
   const [events, setEvents] = React.useState([]);
   const [selectedEvent, setSelectedEvent] = React.useState({
     _id: "",
@@ -64,7 +66,7 @@ const EventProvider = ({ children }) => {
 
   const saveEvent = async (data) => {
     const adjustPayload = fixDatesAsTimestamps(data);
-    const newEvent = await createEvent({ ...adjustPayload, ...data });
+    const newEvent = await createEvent({ ...adjustPayload, ...data }, {headers: {"Authorization": `Bearer ${token}`}});
     if (newEvent.success) {
       init();
     }
@@ -72,7 +74,7 @@ const EventProvider = ({ children }) => {
   };
 
   const editEvent = async (data) => {
-    const res = await updateEvent(selectedEvent._id, data);
+    const res = await updateEvent(selectedEvent._id, data, {headers: {"Authorization": `Bearer ${token}`}});
     const reformatItem = fixDatesAsTimestamps(res.event);
     if (res.success) {
       handleClose();
@@ -82,7 +84,7 @@ const EventProvider = ({ children }) => {
   };
 
   const removeEvent = async () => {
-    const newEvent = await deleteEvent(selectedEvent._id);
+    const newEvent = await deleteEvent(selectedEvent._id, {headers: {"Authorization": `Bearer ${token}`}});
     if (newEvent.success) {
       handleClose();
       init();
@@ -92,18 +94,19 @@ const EventProvider = ({ children }) => {
 
   const init = async () => {
     try {
-      const events = await fetchEvents();
+      const events = await fetchEvents(null, {headers: {"Authorization": `Bearer ${token}`}});
       const newItems = reformatEvents(events);
       console.log("init: ", newItems);
       setEvents(newItems);
     } catch (e) {
-      alert(e);
+      // alert(e);
+      console.log(e)
     }
   };
 
   React.useEffect(() => {
     init();
-  }, []);
+  }, [token]);
 
   return (
     <EventContext.Provider
