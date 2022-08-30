@@ -38,7 +38,7 @@ export default function Login() {
                     <p>Get token from <b>GET /api/v1/login</b> -&gt; <a target="_blank" href="https://ts-dev-api.glootie.ml/docs">API Docs</a></p>
                 </Grid>
                 <Grid item xs={4}>
-                    <Button variant="contained" className="m-3" style={{ float: 'right', backgroundColor: "green" }} color="primary">Submit</Button>
+                    <Button variant="contained" className="m-3" style={{ float: 'right', backgroundColor: "green" }} color="primary" onClick={handleSubmit}>Submit</Button>
                 </Grid>
             </Grid>
 		</div>
