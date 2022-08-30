@@ -1,67 +1,96 @@
 // context/todoContext.tsx
 import * as React from "react";
 // Api
-import {
-    fetchProjects,
-  } from "../utils/api";
+import { fetchProjects, createProject } from "../utils/api";
+// Context
+import { useAuthContext } from "./AuthContext";
 
 export const ProjectContext = React.createContext("");
 
 const ProjectProvider = ({ children }) => {
+    const { token } = useAuthContext();
 	const [modal, setModal] = React.useState(false);
-	const [formType, setFormType] = React.useState('');
+	const [formType, setFormType] = React.useState("");
 	const [projects, setProjects] = React.useState([]);
-    const [project, setProject] = React.useState({
-        name: '',
-        color: ''
-    });
+	const [project, setProject] = React.useState({
+		name: "",
+		color: "",
+	});
 
 	const handleClickOpen = (project = null) => {
 		setModal(true);
-        if (project === null) {
-            setFormType('add');
-        } else {
-            setFormType('update');
-        }
+		if (project === null) {
+			setFormType("add");
+		} else {
+			setFormType("update");
+		}
 	};
 
 	const handleClose = () => {
 		setFormType("");
-		setSelectedEvent(null);
+		setProject({
+            name: "",
+            color: "",
+        });
 		setModal(false);
 	};
 
-    const submitForm = () => {
-		console.log(project)
+	const submitForm = async () => {
+		console.log("ProjectContext.submitForm: ", project);
+        try {
+            const project = await saveProject();
+            return project;
+        } catch(e) {
+            throw new Error(e);
+        }
+		
 	};
 
-    const init = async () => {
-        try {
-          const items = await fetchProjects(null, {headers: {"Authorization": `Bearer ${token}`}});
-          console.log("init: ", items);
-          setEvents(items);
-        } catch (e) {
-          // alert(e);
-          console.log(e)
+	const saveProject = async () => {
+		try {
+            const newProject = await createProject(
+                project,
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            if (newProject.success) {
+                init();
+                handleClose();
+            }
+            return newProject;
+        } catch(e) {
+            throw new Error(e);
         }
-    };
+	};
 
-    React.useEffect(() => {
-        init();
-    }, [])
+	const init = async () => {
+		try {
+			const items = await fetchProjects(null, {
+				headers: { 'Authorization': `Bearer ${token}` },
+			});
+			console.log("ProjectContext.init: ", items);
+			setProjects(items.projects);
+		} catch (e) {
+			throw new Error(e);
+		}
+	};
+
+	React.useEffect(() => {
+		init();
+	}, []);
 
 	return (
 		<ProjectContext.Provider
 			value={{
 				modal,
-                project,
-				projects,
-                setProject,
 				formType,
-                setFormType,
+				setFormType,
+                projects,
+                project,
+				setProject,
 				handleClickOpen,
-                handleClose,
-                submitForm,
+				handleClose,
+				submitForm,
+                saveProject,
 			}}
 		>
 			{children}

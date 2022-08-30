@@ -75,7 +75,7 @@ export async function deleteEvent(id, headers = null) {
  * 
  * -------------------------------------------------------------------------------
  */
- export async function fetchProjects() {
+ export async function fetchProjects(query = null, headers = null) {
   try {
     const res = await axios.get(`${HOST}/api/v1/projects`, headers);
     const data = res.data;
@@ -84,4 +84,11 @@ export async function deleteEvent(id, headers = null) {
   } catch(e) {
     throw new Error(e);
   }
+}
+
+export async function createProject(projectInput, headers = null) {
+  const res = await axios.post(`${HOST}/api/v1/projects`, projectInput, headers);
+  const project = res.data;
+  console.log("createProject: ", project);
+  return project;
 }
