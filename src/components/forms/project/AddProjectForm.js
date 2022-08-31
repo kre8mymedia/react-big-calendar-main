@@ -7,7 +7,8 @@ import {
 	TextField,
 	Grid,
 	Button,
-  } from "@material-ui/core";
+} from "@material-ui/core";
+import ColorPicker from 'material-ui-color-picker'
 
 import { useProjectContext } from "../../../contexts/ProjectContext";
 
@@ -42,13 +43,14 @@ export default function AddProjectForm() {
 					</Grid>
 					<Grid item xs={12}>
 						<TextField
-							fullWidth
-							variant="outlined"
-							type="text"
+							id="name"
 							label="Color"
 							placeholder="Enter project color..."
+							type="color"
+							fullWidth
+							variant="outlined"
 							value={project.color || ""}
-							onChange={(e) => setProject({ color: e.target.value, name: project.name })}
+							onChange={(e) => setProject({ name: project.name, color: e.target.value })}
 						/>
 					</Grid>
 				</Grid>

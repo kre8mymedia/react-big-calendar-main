@@ -15,6 +15,7 @@
     "@material-ui/icons": "4.11.3",
     "@mui/material": "5.10.2",
     "axios": "0.27.2",
+    "material-ui-color-picker": "^3.5.1",
     "moment": "2.24.0",
     "react": "16.8.6",
     "react-big-calendar-like-google": "0.0.3",
