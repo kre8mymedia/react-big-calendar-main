@@ -7,6 +7,7 @@ import {
   DialogContentText,
   DialogTitle
 } from "@material-ui/core";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 export default function ConfirmationModal(props) {
   const [open, setOpen] = React.useState(false);
@@ -21,12 +22,20 @@ export default function ConfirmationModal(props) {
 
   return (
     <>
-      <Button
-        style={{ position: "absolute", left: 20 }}
-        onClick={handleClickOpen}
-      >
-        Remove
-      </Button>
+      {props.action === 'Delete Project' ? (
+        <Button
+          onClick={handleClickOpen}
+        >
+          <DeleteIcon />
+        </Button>
+      ) : (
+        <Button
+          style={{ position: "absolute", left: 20 }}
+          onClick={handleClickOpen}
+        >
+          Remove
+        </Button>
+      )}
       <Dialog
         open={open}
         onClose={handleClose}

@@ -1,7 +1,7 @@
 import axios from "axios";
 // import { access_token } from "../config";
 
-const APP_ENV = "development";
+const APP_ENV = "production";
 const HOST =
   APP_ENV === "development"
     ? "https://1dde-99-36-3-176.ngrok.io"
@@ -90,5 +90,12 @@ export async function createProject(projectInput, headers = null) {
   const res = await axios.post(`${HOST}/api/v1/projects`, projectInput, headers);
   const project = res.data;
   console.log("createProject: ", project);
+  return project;
+}
+
+export async function deleteProject(id, headers = null) {
+  const res = await axios.delete(`${HOST}/api/v1/projects/${id}`, headers);
+  const project = res.data;
+  console.log("deleteProject: ", project);
   return project;
 }

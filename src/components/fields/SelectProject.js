@@ -2,8 +2,10 @@ import React from 'react';
 import {
     MenuItem,
     Select,
-    Chip
+    Chip,
+    Grid
 } from "@material-ui/core";
+import ConfirmationModal from '../modals/ConfirmationModal';
 
 import { useProjectContext } from "../../contexts/ProjectContext";
 
@@ -50,12 +52,21 @@ export default function SelectProject() {
                 <MenuItem
                     key={project._id}
                     value={project}
-                    style={{ 
-                        backgroundColor: `${project.color}`,
-                        color: 'white'
-                    }}
                 >
-                    {project.name}
+                    <Grid container>
+                        <Grid item xs={10}>
+                            {project.name}
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Chip 
+                                label={`${project.color}`} 
+                                style={{ 
+                                    backgroundColor: `${project.color}`, 
+                                    color: "white"
+                                }}
+                            />
+                        </Grid>
+                    </Grid>
                 </MenuItem>
             ))}
         </Select>
