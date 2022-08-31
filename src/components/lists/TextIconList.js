@@ -9,7 +9,6 @@ import {
     Button,
     Avatar,
     ListItem,
-    IconButton,
     ListItemAvatar,
     ListItemText,
     DialogTitle,
@@ -22,11 +21,9 @@ import { useProjectContext } from "../../contexts/ProjectContext";
 export default function TextIconList() {
     const {
 		projects,
-        handleClose,
         setFormType,
         removeProject,
     } = useProjectContext();
-    const [dense, setDense] = React.useState(true);
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -34,7 +31,7 @@ export default function TextIconList() {
             <DialogContent>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <List dense={dense}>
+                        <List dense={true}>
                             <Box sx={{ maxHeight: "400px" }}>
                                 {projects.map((project) => (
                                     <ListItem
@@ -59,7 +56,6 @@ export default function TextIconList() {
             </DialogContent>
             <DialogActions>
                 <Button onClick={() => setFormType('add')}>Cancel</Button>
-                {/* <Button>Submit</Button> */}
             </DialogActions>
         </Box>
     );

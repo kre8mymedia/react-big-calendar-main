@@ -19,6 +19,7 @@ const ProjectProvider = ({ children }) => {
 	});
 
 	const handleClickOpen = (project = null) => {
+		init();
 		setModal(true);
 		if (project === null) {
 			setFormType("add");
@@ -68,7 +69,6 @@ const ProjectProvider = ({ children }) => {
 		try {
 			const newEvent = await deleteProject(id, {headers: {"Authorization": `Bearer ${token}`}});
 			if (newEvent.success) {
-				handleClose();
 				init();
 			}
 			return newEvent;
