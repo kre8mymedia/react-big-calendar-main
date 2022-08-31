@@ -1,7 +1,7 @@
 // context/todoContext.tsx
 import * as React from "react";
 // Api
-import { fetchProjects, createProject } from "../utils/api";
+import { fetchProjects, createProject, deleteProject } from "../utils/api";
 // Context
 import { useAuthContext } from "./AuthContext";
 
@@ -30,6 +30,7 @@ const ProjectProvider = ({ children }) => {
 	const handleClose = () => {
 		setFormType("");
 		setProject({
+			_id: "",
             name: "",
             color: "",
         });
@@ -63,6 +64,19 @@ const ProjectProvider = ({ children }) => {
         }
 	};
 
+	const removeProject = async (id) => {
+		try {
+			const newEvent = await deleteProject(id, {headers: {"Authorization": `Bearer ${token}`}});
+			if (newEvent.success) {
+				handleClose();
+				init();
+			}
+			return newEvent;
+		} catch(e) {
+			throw new Error(e);
+		}
+	};
+
 	const init = async () => {
 		try {
 			const items = await fetchProjects(null, {headers: {"Authorization": `Bearer ${localStorage.getItem('token')}`}});
@@ -90,6 +104,7 @@ const ProjectProvider = ({ children }) => {
 				handleClose,
 				submitForm,
                 saveProject,
+				removeProject,
 			}}
 		>
 			{children}
