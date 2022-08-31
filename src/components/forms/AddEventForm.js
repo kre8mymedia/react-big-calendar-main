@@ -10,6 +10,7 @@ import {
   Button
 } from "@material-ui/core";
 import SelectProject from '../fields/SelectProject';
+import MDEditor from '@uiw/react-md-editor';
 
 import { useEventContext } from "../../contexts/EventContext";
 
@@ -74,16 +75,9 @@ export default function AddEventForm() {
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              label="Description"
-              placeholder="Enter event description"
-              multiline
-              minRows={2}
-              maxRows={3}
-              value={description || ""}
-              onChange={(e) => setDesc(e.target.value)}
+            <MDEditor
+              value={description}
+              onChange={setDesc}
             />
           </Grid>
           <Grid item xs={6}>

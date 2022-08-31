@@ -38,7 +38,12 @@ export default function EventModal() {
       >
         <FaCalendarPlus />
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog 
+        open={open} 
+        onClose={handleClose}
+        fullWidth={true}
+        maxWidth={'md'}
+      >
         {chooseFormType({ type: formType })}
       </Dialog>
     </div>
