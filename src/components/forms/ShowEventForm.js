@@ -5,12 +5,15 @@ import {
   DialogActions,
   DialogContentText,
   TextField,
+  Paper,
   Grid,
   Button
 } from "@material-ui/core";
 import "../../index.scss";
 // Components
 import ConfirmationModal from "../modals/ConfirmationModal";
+
+import MDEditor, { commands } from '@uiw/react-md-editor';
 // Contexts
 import { useEventContext } from "../../contexts/EventContext";
 
@@ -43,16 +46,13 @@ export default function ShowEventForm() {
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              label="Description"
-              placeholder="Enter event description"
-              multiline
-              minRows={2}
-              maxRows={3}
-              value={selectedEvent ? selectedEvent.description : null}
-              disabled={true}
+            <MDEditor
+              value={selectedEvent.description}
+              preview="preview"
+              commands={[
+                commands.codePreview
+              ]}
+              // onChange={setDesc}
             />
           </Grid>
           <Grid item xs={6}>
