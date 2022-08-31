@@ -92,3 +92,10 @@ export async function createProject(projectInput, headers = null) {
   console.log("createProject: ", project);
   return project;
 }
+
+export async function deleteProject(id, headers = null) {
+  const res = await axios.delete(`${HOST}/api/v1/projects/${id}`, headers);
+  const project = res.data;
+  console.log("deleteProject: ", project);
+  return project;
+}

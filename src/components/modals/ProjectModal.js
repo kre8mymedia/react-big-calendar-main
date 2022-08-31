@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Dialog } from "@material-ui/core";
 import AddProjectForm from "../forms/project/AddProjectForm";
 import UpdateProjectForm from "../forms/project/UpdateProjectForm";
+import TextIconList from "../lists/TextIconList";
 
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 
@@ -12,10 +13,12 @@ const chooseFormType = (props) => {
     return <AddProjectForm />;
   } else if (props.type === "update") {
     return <UpdateProjectForm />;
+  } else if (props.type === "list") {
+    return <TextIconList />;
   }
 };
 
-export default function EventModal() {
+export default function ProjectModal() {
   const {
     modal,
     handleClickOpen,

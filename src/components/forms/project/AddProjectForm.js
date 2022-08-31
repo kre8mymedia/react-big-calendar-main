@@ -8,7 +8,6 @@ import {
 	Grid,
 	Button,
 } from "@material-ui/core";
-import ColorPicker from 'material-ui-color-picker'
 
 import { useProjectContext } from "../../../contexts/ProjectContext";
 
@@ -17,7 +16,8 @@ export default function AddProjectForm() {
 		submitForm,
 		handleClose,
 		project,
-		setProject
+		setProject,
+		setFormType,
 	  } = useProjectContext();
 
 	return (
@@ -56,6 +56,13 @@ export default function AddProjectForm() {
 				</Grid>
 			</DialogContent>
 			<DialogActions>
+				{/* <ConfirmationModal action="Delete Project" /> */}
+				<Button
+					style={{ position: "absolute", left: 20 }}
+					onClick={() => setFormType('list')}
+				>
+					Edit
+				</Button>
 				<Button onClick={handleClose}>Cancel</Button>
 				<Button onClick={submitForm}>Submit</Button>
 			</DialogActions>
