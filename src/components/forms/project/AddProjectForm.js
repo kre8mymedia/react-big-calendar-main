@@ -37,8 +37,8 @@ export default function AddProjectForm() {
 							type="text"
 							fullWidth
 							variant="outlined"
-							value={project.name || ""}
-							onChange={(e) => setProject({ name: e.target.value, color: project.color })}
+							value={project ? project.name : ""}
+							onChange={(e) => setProject({ name: e.target.value, color: project ? project.color : "" })}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -49,8 +49,8 @@ export default function AddProjectForm() {
 							type="color"
 							fullWidth
 							variant="outlined"
-							value={project.color || ""}
-							onChange={(e) => setProject({ name: project.name, color: e.target.value })}
+							value={project ? project.color : ""}
+							onChange={(e) => setProject({ name: project ? project.name : "", color: e.target.value })}
 						/>
 					</Grid>
 				</Grid>

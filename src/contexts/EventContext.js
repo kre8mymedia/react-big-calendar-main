@@ -24,9 +24,10 @@ const EventProvider = ({ children }) => {
     _id: "",
     title: "",
     description: "",
+    bgColor: "",
     start: null,
     end: null,
-    bgColor: ""
+    project: null,
   });
   const [open, setOpen] = React.useState(false);
   const [formType, setFormType] = React.useState("");
@@ -53,7 +54,7 @@ const EventProvider = ({ children }) => {
         setFormType("show");
         const stamps = fixDatesAsIso(event);
         setSelectedEvent({ ...event, ...stamps });
-        console.log("selectExisting", { ...event, ...stamps });
+        console.log("EventContext.selectExisting", { ...event, ...stamps });
       }
     } catch (e) {
       alert("handleClickOpen: ", e);
@@ -62,18 +63,14 @@ const EventProvider = ({ children }) => {
 
   const handleClose = () => {
     setFormType("");
-    setProject({
-      _id: '',
-      name: '',
-      color: '',
-    });
+    setProject(null);
     setSelectedEvent(null);
     setOpen(false);
   };
 
   const saveEvent = async (data) => {
     const adjustPayload = fixDatesAsTimestamps(data);
-    const newEvent = await createEvent({ ...adjustPayload, ...data, project: project._id }, {headers: {"Authorization": `Bearer ${token}`}});
+    const newEvent = await createEvent({ ...adjustPayload, ...data, project: project ? project._id : null }, {headers: {"Authorization": `Bearer ${token}`}});
     if (newEvent.success) {
       init();
     }

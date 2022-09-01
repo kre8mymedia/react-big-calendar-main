@@ -10,11 +10,13 @@ import {
   Button
 } from "@material-ui/core";
 import MDEditor from '@uiw/react-md-editor';
-
+import SelectProject from '../fields/SelectProject';
 import { useEventContext } from "../../contexts/EventContext";
+import { useProjectContext } from "../../contexts/ProjectContext";
 
 export default function UpdateEventForm() {
   const { handleClose, selectedEvent, editEvent } = useEventContext();
+  const { project } = useProjectContext();
 
   const [title, setTitle] = React.useState("");
   const [description, setDesc] = React.useState("");
@@ -27,7 +29,8 @@ export default function UpdateEventForm() {
         title,
         description,
         start,
-        end
+        end,
+        project: project === null ? null : project._id,
       });
       console.log("UpdateEventForm.submit: ", res);
     } catch (e) {
@@ -51,6 +54,9 @@ export default function UpdateEventForm() {
           This modal shows the event details..
         </DialogContentText>
         <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <SelectProject />
+          </Grid>
           <Grid item xs={12}>
             <TextField
               autoFocus

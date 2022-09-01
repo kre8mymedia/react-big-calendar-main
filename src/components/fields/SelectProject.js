@@ -5,9 +5,9 @@ import {
     Chip,
     Grid
 } from "@material-ui/core";
-import ConfirmationModal from '../modals/ConfirmationModal';
 
 import { useProjectContext } from "../../contexts/ProjectContext";
+import { useEventContext } from "../../contexts/EventContext";
 
 export default function SelectProject() {
     const {
@@ -15,11 +15,18 @@ export default function SelectProject() {
 		projects,
         setProject
 	} = useProjectContext();
+    const {
+        selectedEvent
+	} = useEventContext();
 
     const handleChange = (event) => {
         setProject(event.target.value);
         console.log('SelectProject.handleChange: ', event.target.value);
     };
+
+    React.useEffect(() => {
+        setProject(selectedEvent ? selectedEvent.project : null);
+    }, [])
 
   return (
     <>
@@ -28,15 +35,12 @@ export default function SelectProject() {
             displayEmpty
             label="Project"
             variant="outlined"
-            value={project}
+            value={project || {}}
             onChange={handleChange}
             renderValue={() => {
                 if (
-                    project._id === "" || 
                     project === "" || 
-                    project === null &&
-                    project.name === "" &&
-                    project.color === ""
+                    project === null
                 ) {
                     return <em>Select Project</em>
                 } else {
@@ -45,7 +49,7 @@ export default function SelectProject() {
                 
             }}
         >
-            <MenuItem value="">
+            <MenuItem value={null}>
                 <em>None</em>
             </MenuItem>
             {projects.map((project) => (
