@@ -48,7 +48,8 @@ export default function Calender() {
             description: event.description,
             bgColor: event.bgColor,
             start: event.start,
-            end: event.end
+            end: event.end,
+            project: event.project ? event.project : null,
           };
           handleClickOpen(data);
         }}

@@ -12,11 +12,7 @@ const ProjectProvider = ({ children }) => {
 	const [modal, setModal] = React.useState(false);
 	const [formType, setFormType] = React.useState("");
 	const [projects, setProjects] = React.useState([]);
-	const [project, setProject] = React.useState({
-		_id: '',
-		name: "",
-		color: "",
-	});
+	const [project, setProject] = React.useState(null);
 
 	const handleClickOpen = (project = null) => {
 		init();
@@ -30,11 +26,7 @@ const ProjectProvider = ({ children }) => {
 
 	const handleClose = () => {
 		setFormType("");
-		setProject({
-			_id: "",
-            name: "",
-            color: "",
-        });
+		setProject(null);
 		setModal(false);
 	};
 

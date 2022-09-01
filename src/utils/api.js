@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const APP_ENV = "production";
+const APP_ENV = "development";
 const HOST =
   APP_ENV === "development"
-    ? "https://f9db-99-36-3-176.ngrok.io"
+    ? "https://bbb0-99-36-3-176.ngrok.io"
     : "https://ts-dev-api.glootie.ml";
 
 // axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
