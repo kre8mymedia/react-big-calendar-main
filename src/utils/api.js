@@ -1,9 +1,10 @@
 import axios from "axios";
+require('dotenv').config()
 
-const APP_ENV = "production";
+const APP_ENV = process.env.REACT_APP_ENV;
 const HOST =
   APP_ENV === "development"
-    ? "https://395d-99-36-3-176.ngrok.io"
+    ? "https://ae9f-99-36-3-176.ngrok.io"
     : "https://ts-dev-api.glootie.ml";
 
 // axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;

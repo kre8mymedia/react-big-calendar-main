@@ -17,6 +17,7 @@
     "@mui/material": "^5.10.3",
     "@uiw/react-md-editor": "^3.18.1",
     "axios": "0.27.2",
+    "dotenv": "^16.0.2",
     "material-ui-color-picker": "^3.5.1",
     "moment": "2.24.0",
     "react": "^18.2.0",
