@@ -13,12 +13,15 @@ import {
 } from "../utils/format";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useProjectContext } from "../contexts/ProjectContext";
+import { useNotificationContext } from "../contexts/NotificationContext";
 
 export const EventContext = React.createContext();
 
 const EventProvider = ({ children }) => {
   const { token } = useAuthContext();
   const { project, setProject } = useProjectContext();
+  const { selected } = useNotificationContext();
+
   const [events, setEvents] = React.useState([]);
   const [selectedEvent, setSelectedEvent] = React.useState({
     _id: "",
@@ -28,6 +31,7 @@ const EventProvider = ({ children }) => {
     start: null,
     end: null,
     project: null,
+    notifications: [],
   });
   const [open, setOpen] = React.useState(false);
   const [formType, setFormType] = React.useState("");
@@ -70,7 +74,7 @@ const EventProvider = ({ children }) => {
 
   const saveEvent = async (data) => {
     const adjustPayload = fixDatesAsTimestamps(data);
-    const newEvent = await createEvent({ ...adjustPayload, ...data, project: project ? project._id : null }, {headers: {"Authorization": `Bearer ${token}`}});
+    const newEvent = await createEvent({ ...adjustPayload, ...data, project: project ? project._id : null, notifications: selected.length > 0 ? selected : null }, {headers: {"Authorization": `Bearer ${token}`}});
     if (newEvent.success) {
       init();
     }
@@ -78,7 +82,7 @@ const EventProvider = ({ children }) => {
   };
 
   const editEvent = async (data) => {
-    const res = await updateEvent(selectedEvent._id, data, {headers: {"Authorization": `Bearer ${token}`}});
+    const res = await updateEvent(selectedEvent._id, {...data, notifications: selected.length > 0 ? selected : null}, {headers: {"Authorization": `Bearer ${token}`}});
     const reformatItem = fixDatesAsTimestamps(res.event);
     if (res.success) {
       handleClose();

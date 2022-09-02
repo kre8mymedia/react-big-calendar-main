@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const APP_ENV = "production";
+const APP_ENV = "development";
 const HOST =
   APP_ENV === "development"
-    ? "https://bbb0-99-36-3-176.ngrok.io"
+    ? "https://395d-99-36-3-176.ngrok.io"
     : "https://ts-dev-api.glootie.ml";
 
 // axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
@@ -97,4 +97,20 @@ export async function deleteProject(id, headers = null) {
   const project = res.data;
   console.log("deleteProject: ", project);
   return project;
+}
+
+/**-------------------------------------------------------------------------------
+ * Project Routes
+ * 
+ * -------------------------------------------------------------------------------
+ */
+ export async function fetchNotifications(query = null, headers = null) {
+  try {
+    const res = await axios.get(`${HOST}/api/v1/notifications`, headers);
+    const data = res.data;
+    console.log("api.fetchNotifications: ", data);
+    return data;
+  } catch(e) {
+    throw new Error(e);
+  }
 }

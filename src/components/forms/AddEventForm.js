@@ -10,12 +10,15 @@ import {
   Button
 } from "@material-ui/core";
 import SelectProject from '../fields/SelectProject';
+import MultipleSelect from "../fields/MultipleSelect";
 import MDEditor from '@uiw/react-md-editor';
 
 import { useEventContext } from "../../contexts/EventContext";
+import { useNotificationContext } from "../../contexts/NotificationContext";
 
 export default function AddEventForm() {
   const { saveEvent, handleClose, selectedEvent } = useEventContext();
+  const { notifications, notification, selected, setSelected } = useNotificationContext();
 
   const [title, setTitle] = React.useState("");
   const [description, setDesc] = React.useState("");
@@ -34,6 +37,7 @@ export default function AddEventForm() {
         setTitle("");
         setDesc("");
         setStart(null);
+        setSelected([]);
         setEnd(null);
         handleClose();
       }
@@ -58,8 +62,17 @@ export default function AddEventForm() {
           This modal is used for creating new calendar events.
         </DialogContentText>
         <Grid container spacing={2}>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <SelectProject />
+          </Grid>
+          <Grid item xs={6}>
+            <MultipleSelect 
+              items={notifications} 
+              item={notification ? notification : null} 
+              label="Notification" 
+              selected={selected}
+              setSelected={setSelected} 
+            />
           </Grid>
           <Grid item xs={12}>
             <TextField
