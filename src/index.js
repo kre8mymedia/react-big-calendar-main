@@ -4,16 +4,19 @@ import Home from "./pages/Home";
 import EventProvider from "./contexts/EventContext";
 import AuthProvider from "./contexts/AuthContext";
 import ProjectProvider from "./contexts/ProjectContext";
+import NotificationProvider from "./contexts/NotificationContext";
 
 class App extends Component {
   render() {
     return (
       <AuthProvider>
-        <ProjectProvider>
-          <EventProvider>
-            <Home />
-          </EventProvider>
-        </ProjectProvider>
+        <NotificationProvider>
+          <ProjectProvider>
+            <EventProvider>
+              <Home />
+            </EventProvider>
+          </ProjectProvider>
+        </NotificationProvider>
       </AuthProvider>
     );
   }

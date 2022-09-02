@@ -7,6 +7,7 @@ export const reformatEvents = (events) => {
     newObj["description"] = event.description;
     newObj["hours"] = event.hours ? event.hours : 0;
     newObj["project"] = event.project ? event.project : null;
+    newObj["notifications"] = event.notifications?.length > 0 ? event.notifications : [];
     newObj["start"] = new Date(
       Date.parse(new Date(Date.parse(event.start)).toISOString().slice(0, 16))
     );
