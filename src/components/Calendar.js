@@ -7,6 +7,7 @@ import moment from "moment";
 import BigCalendar from "react-big-calendar-like-google";
 import EventModal from "../components/modals/EventModal";
 import ProjectModal from "../components/modals/ProjectModal";
+import NotificationModal from "../components/modals/NotificationModal";
 import {
   Grid,
 } from "@material-ui/core";
@@ -29,6 +30,9 @@ export default function Calender() {
         </Grid>
         <Grid item>
           <ProjectModal />
+        </Grid>
+        <Grid item>
+          <NotificationModal renderFrom="Calendar" />
         </Grid>
         <Grid item>
           <button onClick={() => {setToken(''); localStorage.setItem('token', '')}} style={{ position: "absolute", right: 10, top: 10 }}>Logout</button>

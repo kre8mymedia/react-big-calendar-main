@@ -67,6 +67,16 @@ const EventProvider = ({ children }) => {
 
   const handleClose = () => {
     setFormType("");
+    setSelectedEvent({
+      _id: "",
+      title: "",
+      description: "",
+      bgColor: "",
+      start: null,
+      end: null,
+      project: null,
+      notifications: [],
+    });
     setProject(null);
     setProject(null);
     setSelected([]);

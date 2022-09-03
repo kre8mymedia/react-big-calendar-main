@@ -4,7 +4,7 @@ require('dotenv').config()
 const APP_ENV = process.env.REACT_APP_ENV;
 const HOST =
   APP_ENV === "development"
-    ? "https://4d37-99-36-3-176.ngrok.io"
+    ? "http://localhost:8000"
     : "https://ts-dev-api.glootie.ml";
 
 // axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
@@ -101,7 +101,7 @@ export async function deleteProject(id, headers = null) {
 }
 
 /**-------------------------------------------------------------------------------
- * Project Routes
+ * Notification Routes
  * 
  * -------------------------------------------------------------------------------
  */
@@ -111,6 +111,28 @@ export async function deleteProject(id, headers = null) {
     const data = res.data;
     console.log("api.fetchNotifications: ", data);
     return data;
+  } catch(e) {
+    throw new Error(e);
+  }
+}
+
+export async function createNotification(notificationInput, headers = null) {
+  try {
+    const res = await axios.post(`${HOST}/api/v1/notifications`, notificationInput, headers);
+    const notification = res.data;
+    console.log("createNotification: ", notification);
+    return notification;
+  } catch(e) {
+    throw new Error(e);
+  }
+}
+
+export async function deleteNotification(id, headers = null) {
+  try {
+    const res = await axios.delete(`${HOST}/api/v1/notifications/${id}`, headers);
+    const notification = res.data;
+    console.log("deleteNotification: ", notification);
+    return notification;
   } catch(e) {
     throw new Error(e);
   }
