@@ -42,16 +42,7 @@ export default function Calender() {
         scrollToTime={new Date(1970, 1, 1, 6)}
         defaultDate={new Date()}
         onSelectEvent={(event) => {
-          const data = {
-            _id: event._id,
-            title: event.title,
-            description: event.description,
-            bgColor: event.bgColor,
-            start: event.start,
-            end: event.end,
-            project: event.project ? event.project : null,
-          };
-          handleClickOpen(data);
+          handleClickOpen(event);
         }}
         onSelectSlot={(slotInfo) => {
           const data = {

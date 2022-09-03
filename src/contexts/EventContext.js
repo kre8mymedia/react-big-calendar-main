@@ -20,7 +20,7 @@ export const EventContext = React.createContext();
 const EventProvider = ({ children }) => {
   const { token } = useAuthContext();
   const { project, setProject } = useProjectContext();
-  const { selected, notifications } = useNotificationContext();
+  const { selected, notifications, setSelected } = useNotificationContext();
 
   const [events, setEvents] = React.useState([]);
   const [selectedEvent, setSelectedEvent] = React.useState({
@@ -68,7 +68,8 @@ const EventProvider = ({ children }) => {
   const handleClose = () => {
     setFormType("");
     setProject(null);
-    setSelectedEvent(null);
+    setProject(null);
+    setSelected([]);
     setOpen(false);
   };
 

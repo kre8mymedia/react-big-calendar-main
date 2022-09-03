@@ -12,7 +12,7 @@ import {
 import SelectProject from '../fields/SelectProject';
 import MultipleSelect from "../fields/MultipleSelect";
 import MDEditor from '@uiw/react-md-editor';
-
+// Contexts
 import { useEventContext } from "../../contexts/EventContext";
 import { useNotificationContext } from "../../contexts/NotificationContext";
 
