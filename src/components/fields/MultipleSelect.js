@@ -55,9 +55,12 @@ export default function MultipleSelect(props) {
           input={<OutlinedInput label="Tag" />}
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-              {items.map((value) => (
-                <Chip key={value._id} label={value.name} />
-              ))}
+              {items.map((value) => {
+                const exist = selected.includes(value._id)
+                if (exist) {
+                  return <Chip key={value._id} label={value.name} />
+                }
+              })}
             </Box>
           )}
           MenuProps={MenuProps}
