@@ -118,7 +118,7 @@ export async function deleteProject(id, headers = null) {
 
 export async function createNotification(notificationInput, headers = null) {
   try {
-    const res = await axios.post(`${HOST}/api/v1/notification`, notificationInput, headers);
+    const res = await axios.post(`${HOST}/api/v1/notifications`, notificationInput, headers);
     const notification = res.data;
     console.log("createNotification: ", notification);
     return notification;

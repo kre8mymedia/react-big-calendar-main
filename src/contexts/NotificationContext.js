@@ -21,12 +21,24 @@ const NotificationProvider = ({ children }) => {
 	const handleClose = () => {
 		setFormType("");
 		setModal(false);
+		setNotification(null);
+	};
+
+	const submitForm = async () => {
+		console.log("NotificationContext.submitForm: ", notification);
+        try {
+            const item = await saveNotification();
+            return item;
+        } catch(e) {
+            throw new Error(e);
+        }
+		
 	};
 
 	const saveNotification = async () => {
 		try {
             const item = await createNotification(
-                project,
+                notification,
                 { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
             );
             if (item.success) {
@@ -77,6 +89,7 @@ const NotificationProvider = ({ children }) => {
                 setNotification,
 				saveNotification,
 				removeNotification,
+				submitForm,
                 selected,
                 setSelected,
 				handleClickOpen,
