@@ -22,11 +22,11 @@ export default function ConfirmationModal(props) {
 
   return (
     <>
-      {props.action === 'Delete Project' ? (
+      {props.action === 'Delete Project' || props.action === 'Delete Notification' ? (
         <Button
           onClick={handleClickOpen}
         >
-          <DeleteIcon />
+          <DeleteIcon style={{ position: "absolute", right: 0 }} />
         </Button>
       ) : (
         <Button
