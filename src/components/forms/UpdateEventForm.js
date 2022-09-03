@@ -10,12 +10,16 @@ import {
   Button
 } from "@material-ui/core";
 import MDEditor from '@uiw/react-md-editor';
+import MultipleSelect from "../fields/MultipleSelect";
 import SelectProject from '../fields/SelectProject';
+// Contexts
 import { useEventContext } from "../../contexts/EventContext";
 import { useProjectContext } from "../../contexts/ProjectContext";
+import { useNotificationContext } from "../../contexts/NotificationContext";
 
 export default function UpdateEventForm() {
   const { handleClose, selectedEvent, editEvent } = useEventContext();
+  const { notifications, notification, selected, setSelected } = useNotificationContext();
   const { project } = useProjectContext();
 
   const [title, setTitle] = React.useState("");
@@ -32,6 +36,7 @@ export default function UpdateEventForm() {
         end,
         project: project === null ? null : project._id,
       });
+      setSelected([]);
       console.log("UpdateEventForm.submit: ", res);
     } catch (e) {
       alert(e);
@@ -44,7 +49,20 @@ export default function UpdateEventForm() {
     setDesc(selectedEvent.description);
     setStart(selectedEvent.start);
     setEnd(selectedEvent.end);
-  }, [selectedEvent]);
+  }, [selectedEvent]); 
+  
+  React.useEffect(() => {
+    function populateNotificaitons() {
+      const newNotifications = [];
+      for (let i = 0; i < selectedEvent.notifications.length; i++) {
+        newNotifications.push(selectedEvent.notifications[i]._id);
+      }
+
+      setSelected(newNotifications);
+    }
+
+    populateNotificaitons();
+  }, []);
 
   return (
     <div>
@@ -54,8 +72,18 @@ export default function UpdateEventForm() {
           This modal shows the event details..
         </DialogContentText>
         <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <SelectProject />
+          <Grid item xs={6}>
+            <SelectProject disabled={false} />
+          </Grid>
+          <Grid item xs={6}>
+            <MultipleSelect 
+              disabled={false}
+              items={notifications} 
+              item={notification ? notification : null} 
+              label="Notification" 
+              selected={selected}
+              setSelected={setSelected} 
+            />
           </Grid>
           <Grid item xs={12}>
             <TextField

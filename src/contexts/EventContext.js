@@ -20,7 +20,7 @@ export const EventContext = React.createContext();
 const EventProvider = ({ children }) => {
   const { token } = useAuthContext();
   const { project, setProject } = useProjectContext();
-  const { selected } = useNotificationContext();
+  const { selected, notifications, setSelected } = useNotificationContext();
 
   const [events, setEvents] = React.useState([]);
   const [selectedEvent, setSelectedEvent] = React.useState({
@@ -68,7 +68,8 @@ const EventProvider = ({ children }) => {
   const handleClose = () => {
     setFormType("");
     setProject(null);
-    setSelectedEvent(null);
+    setProject(null);
+    setSelected([]);
     setOpen(false);
   };
 
@@ -115,6 +116,22 @@ const EventProvider = ({ children }) => {
   React.useEffect(() => {
     init();
   }, [token]);
+
+  React.useEffect(() => {
+    function populateNotificaitons() {
+      const newNotifications = [];
+      for (let i = 0; i < notifications.length; i++) {
+        const exist = selected.includes(notifications[i]._id);
+        if (exist) {
+          newNotifications.push(notifications[i]);
+        }
+      }
+
+      setSelectedEvent({ ...selectedEvent, notifications: [...newNotifications] });
+    }
+
+    populateNotificaitons();
+  }, [selected]);
 
   return (
     <EventContext.Provider

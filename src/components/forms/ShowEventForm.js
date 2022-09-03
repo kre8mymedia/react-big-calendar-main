@@ -12,18 +12,37 @@ import {
 import "../../index.scss";
 // Components
 import ConfirmationModal from "../modals/ConfirmationModal";
+import MultipleSelect from "../fields/MultipleSelect";
+import SelectProject from '../fields/SelectProject';
 
 import MDEditor, { commands } from '@uiw/react-md-editor';
 // Contexts
 import { useEventContext } from "../../contexts/EventContext";
+import { useNotificationContext } from "../../contexts/NotificationContext";
 
 export default function ShowEventForm() {
+
   const {
     handleClose,
     selectedEvent,
     setFormType,
     removeEvent
   } = useEventContext();
+
+  const { notifications, notification, selected, setSelected } = useNotificationContext();
+
+  React.useEffect(() => {
+    function populateNotificaitons() {
+      const newNotifications = [];
+      for (let i = 0; i < selectedEvent.notifications.length; i++) {
+        newNotifications.push(selectedEvent.notifications[i]._id);
+      }
+
+      setSelected(newNotifications);
+    }
+
+    populateNotificaitons();
+  }, []);
 
   return (
     <div>
@@ -33,6 +52,19 @@ export default function ShowEventForm() {
           This modal shows the event details..
         </DialogContentText>
         <Grid container spacing={2}>
+        <Grid item xs={6}>
+            <SelectProject disabled={true} />
+          </Grid>
+        <Grid item xs={6}>
+            <MultipleSelect
+              disabled={true} 
+              items={notifications} 
+              item={notification ? notification : null} 
+              label="Notification" 
+              selected={selected}
+              setSelected={setSelected} 
+            />
+          </Grid>
           <Grid item xs={12}>
             <TextField
               autoFocus

@@ -9,7 +9,7 @@ import {
 import { useProjectContext } from "../../contexts/ProjectContext";
 import { useEventContext } from "../../contexts/EventContext";
 
-export default function SelectProject() {
+export default function SelectProject(props) {
     const {
         project,
 		projects,
@@ -33,6 +33,7 @@ export default function SelectProject() {
         <Select
             fullWidth
             displayEmpty
+            disabled={props.disabled}
             label="Project"
             variant="outlined"
             value={project || {}}

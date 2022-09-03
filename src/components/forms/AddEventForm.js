@@ -12,7 +12,7 @@ import {
 import SelectProject from '../fields/SelectProject';
 import MultipleSelect from "../fields/MultipleSelect";
 import MDEditor from '@uiw/react-md-editor';
-
+// Contexts
 import { useEventContext } from "../../contexts/EventContext";
 import { useNotificationContext } from "../../contexts/NotificationContext";
 
@@ -63,10 +63,11 @@ export default function AddEventForm() {
         </DialogContentText>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <SelectProject />
+            <SelectProject disabled={false} />
           </Grid>
           <Grid item xs={6}>
-            <MultipleSelect 
+            <MultipleSelect
+              disabled={false} 
               items={notifications} 
               item={notification ? notification : null} 
               label="Notification" 
