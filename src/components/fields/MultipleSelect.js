@@ -50,6 +50,7 @@ export default function MultipleSelect(props) {
           id="demo-multiple-checkbox"
           defaultValue={props.item}
           multiple
+          disabled={props.disabled}
           value={props.selected}
           onChange={handleChange}
           input={<OutlinedInput label="Tag" />}

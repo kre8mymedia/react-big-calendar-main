@@ -18,7 +18,7 @@ import { useProjectContext } from "../../contexts/ProjectContext";
 import { useNotificationContext } from "../../contexts/NotificationContext";
 
 export default function UpdateEventForm() {
-  const { handleClose, selectedEvent, setSelectedEvent, editEvent } = useEventContext();
+  const { handleClose, selectedEvent, editEvent } = useEventContext();
   const { notifications, notification, selected, setSelected } = useNotificationContext();
   const { project } = useProjectContext();
 
@@ -73,10 +73,11 @@ export default function UpdateEventForm() {
         </DialogContentText>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <SelectProject />
+            <SelectProject disabled={false} />
           </Grid>
           <Grid item xs={6}>
             <MultipleSelect 
+              disabled={false}
               items={notifications} 
               item={notification ? notification : null} 
               label="Notification" 

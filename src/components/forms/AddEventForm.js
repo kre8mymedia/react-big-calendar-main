@@ -63,10 +63,11 @@ export default function AddEventForm() {
         </DialogContentText>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <SelectProject />
+            <SelectProject disabled={false} />
           </Grid>
           <Grid item xs={6}>
-            <MultipleSelect 
+            <MultipleSelect
+              disabled={false} 
               items={notifications} 
               item={notification ? notification : null} 
               label="Notification" 
