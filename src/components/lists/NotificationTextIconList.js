@@ -1,8 +1,7 @@
 import * as React from 'react';
-// import { styled } from '@mui/material/styles';
-import Notifications from '@material-ui/icons/Notifications';
 import Email from '@material-ui/icons/Email';
 import { BsSlack } from "react-icons/bs";
+import { truncate } from '../../utils/format'
 
 import {
     Box,
@@ -42,7 +41,6 @@ export default function NotificationTextIconList() {
                                             key={notification._id}
                                         >
                                             <ListItemAvatar>
-                                                
                                                     {notification.type === 'email' ? (
                                                         <Avatar style={{ backgroundColor: `#021D7C` }}>
                                                             <Email style={{ fill: `white` }} />
@@ -56,6 +54,7 @@ export default function NotificationTextIconList() {
                                             </ListItemAvatar>
                                             <ListItemText
                                                 primary={notification.name}
+                                                secondary={<small>{truncate(notification.hook, 60)}</small>}
                                             />
                                             <ConfirmationModal action="Delete Notification" handleSub={()=>removeNotification(notification._id)} />
                                         </ListItem>
