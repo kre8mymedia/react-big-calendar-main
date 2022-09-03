@@ -32,7 +32,7 @@ export default function Calender() {
           <ProjectModal />
         </Grid>
         <Grid item>
-          <NotificationModal />
+          <NotificationModal renderFrom="Calendar" />
         </Grid>
         <Grid item>
           <button onClick={() => {setToken(''); localStorage.setItem('token', '')}} style={{ position: "absolute", right: 10, top: 10 }}>Logout</button>

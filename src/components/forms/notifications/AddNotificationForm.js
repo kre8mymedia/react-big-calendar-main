@@ -63,7 +63,7 @@ export default function AddNotificationForm() {
 
 	return (
 		<div>
-			<DialogTitle>Create Notification</DialogTitle>
+			<DialogTitle>Add Alert</DialogTitle>
 			<DialogContent>
 				<DialogContentText>
 				This modal is used for creating new notifications.
@@ -74,7 +74,7 @@ export default function AddNotificationForm() {
                             required
 							autoFocus
 							label="Name"
-							placeholder="Enter notification name..."
+							placeholder="Enter alert name..."
 							type="text"
 							fullWidth
 							variant="outlined"

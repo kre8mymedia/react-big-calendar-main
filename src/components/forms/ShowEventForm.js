@@ -14,6 +14,7 @@ import "../../index.scss";
 import ConfirmationModal from "../modals/ConfirmationModal";
 import MultipleSelect from "../fields/MultipleSelect";
 import SelectProject from '../fields/SelectProject';
+import NotificationModal from "../../components/modals/NotificationModal";
 
 import MDEditor, { commands } from '@uiw/react-md-editor';
 // Contexts
@@ -46,11 +47,17 @@ export default function ShowEventForm() {
 
   return (
     <div>
-      <DialogTitle>Show Event</DialogTitle>
+      <DialogTitle>
+        <Grid container spacing={2}>
+          <Grid item xs={11}>
+            {selectedEvent.title}
+          </Grid>
+          <Grid item xs={1}>
+            <NotificationModal renderFrom="ShowEventForm" />
+          </Grid>
+        </Grid>
+      </DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          This modal shows the event details..
-        </DialogContentText>
         <Grid container spacing={2}>
         <Grid item xs={6}>
             <SelectProject disabled={true} />
@@ -65,7 +72,7 @@ export default function ShowEventForm() {
               setSelected={setSelected} 
             />
           </Grid>
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <TextField
               autoFocus
               id="name"
@@ -76,7 +83,7 @@ export default function ShowEventForm() {
               value={selectedEvent ? selectedEvent.title : null}
               disabled={true}
             />
-          </Grid>
+          </Grid> */}
           <Grid item xs={12}>
             <MDEditor
               value={selectedEvent.description}
