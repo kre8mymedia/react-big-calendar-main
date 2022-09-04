@@ -39,6 +39,7 @@ export default function EventModal() {
         <FaCalendarPlus />
       </Button>
       <Dialog 
+        disableBackdropClick 
         open={open} 
         onClose={handleClose}
         fullWidth={true}
