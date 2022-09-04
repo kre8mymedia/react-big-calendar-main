@@ -1,3 +1,4 @@
+import "../../index.scss";
 import React from "react";
 import {
   DialogTitle,
@@ -8,12 +9,16 @@ import {
   Grid,
   Button
 } from "@material-ui/core";
-import "../../index.scss";
-
+import SelectProject from '../fields/SelectProject';
+import MultipleSelect from "../fields/MultipleSelect";
+import MDEditor from '@uiw/react-md-editor';
+// Contexts
 import { useEventContext } from "../../contexts/EventContext";
+import { useNotificationContext } from "../../contexts/NotificationContext";
 
 export default function AddEventForm() {
   const { saveEvent, handleClose, selectedEvent } = useEventContext();
+  const { notifications, notification, selected, setSelected } = useNotificationContext();
 
   const [title, setTitle] = React.useState("");
   const [description, setDesc] = React.useState("");
@@ -32,6 +37,7 @@ export default function AddEventForm() {
         setTitle("");
         setDesc("");
         setStart(null);
+        setSelected([]);
         setEnd(null);
         handleClose();
       }
@@ -56,8 +62,22 @@ export default function AddEventForm() {
           This modal is used for creating new calendar events.
         </DialogContentText>
         <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <SelectProject disabled={false} />
+          </Grid>
+          <Grid item xs={6}>
+            <MultipleSelect
+              disabled={false} 
+              items={notifications} 
+              item={notification ? notification : null} 
+              label="Notification" 
+              selected={selected}
+              setSelected={setSelected} 
+            />
+          </Grid>
           <Grid item xs={12}>
             <TextField
+              placeholder="Enter event title"
               autoFocus
               id="name"
               label="Title"
@@ -69,16 +89,9 @@ export default function AddEventForm() {
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              label="Description"
-              placeholder="Enter event description"
-              multiline
-              minRows={2}
-              maxRows={3}
-              value={description || ""}
-              onChange={(e) => setDesc(e.target.value)}
+            <MDEditor
+              value={description}
+              onChange={setDesc}
             />
           </Grid>
           <Grid item xs={6}>

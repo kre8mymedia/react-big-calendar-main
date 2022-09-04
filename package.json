@@ -13,17 +13,23 @@
     "@emotion/styled": "11.10.0",
     "@material-ui/core": "4.12.4",
     "@material-ui/icons": "4.11.3",
-    "@mui/material": "5.10.2",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.3",
+    "@uiw/react-md-editor": "^3.18.1",
     "axios": "0.27.2",
+    "dotenv": "^16.0.2",
+    "material-ui-color-picker": "^3.5.1",
     "moment": "2.24.0",
-    "react": "16.8.6",
+    "react": "^18.2.0",
     "react-big-calendar-like-google": "0.0.3",
     "react-dom": "16.8.6",
-    "react-icons": "4.4.0"
+    "react-icons": "4.4.0",
+    "sass": "^1.54.6",
+    "sass-loader": "^13.0.2"
   },
   "devDependencies": {
     "@types/node-sass": "3.10.32",
-    "@types/react": "16.4.16",
+    "@types/react": "^18.0.18",
     "@types/react-dom": "16.0.9",
     "@types/react-transition-group": "2.0.14",
     "babel-minify": "^0.4.3",
@@ -31,7 +37,6 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
-    "node-sass": "^4.9.2",
     "parcel-bundler": "^1.6.1"
   },
   "keywords": []

@@ -11,18 +11,27 @@ import {
   fixDatesAsIso,
   reformatEvents
 } from "../utils/format";
+import { useAuthContext } from "../contexts/AuthContext";
+import { useProjectContext } from "../contexts/ProjectContext";
+import { useNotificationContext } from "../contexts/NotificationContext";
 
 export const EventContext = React.createContext();
 
 const EventProvider = ({ children }) => {
+  const { token } = useAuthContext();
+  const { project, setProject } = useProjectContext();
+  const { selected, notifications, setSelected } = useNotificationContext();
+
   const [events, setEvents] = React.useState([]);
   const [selectedEvent, setSelectedEvent] = React.useState({
     _id: "",
     title: "",
     description: "",
+    bgColor: "",
     start: null,
     end: null,
-    bgColor: ""
+    project: null,
+    notifications: [],
   });
   const [open, setOpen] = React.useState(false);
   const [formType, setFormType] = React.useState("");
@@ -49,7 +58,7 @@ const EventProvider = ({ children }) => {
         setFormType("show");
         const stamps = fixDatesAsIso(event);
         setSelectedEvent({ ...event, ...stamps });
-        console.log("selectExisting", { ...event, ...stamps });
+        console.log("EventContext.selectExisting", { ...event, ...stamps });
       }
     } catch (e) {
       alert("handleClickOpen: ", e);
@@ -58,13 +67,25 @@ const EventProvider = ({ children }) => {
 
   const handleClose = () => {
     setFormType("");
-    setSelectedEvent(null);
+    setSelectedEvent({
+      _id: "",
+      title: "",
+      description: "",
+      bgColor: "",
+      start: null,
+      end: null,
+      project: null,
+      notifications: [],
+    });
+    setProject(null);
+    setProject(null);
+    setSelected([]);
     setOpen(false);
   };
 
   const saveEvent = async (data) => {
     const adjustPayload = fixDatesAsTimestamps(data);
-    const newEvent = await createEvent({ ...adjustPayload, ...data });
+    const newEvent = await createEvent({ ...adjustPayload, ...data, project: project ? project._id : null, notifications: selected.length > 0 ? selected : null }, {headers: {"Authorization": `Bearer ${token}`}});
     if (newEvent.success) {
       init();
     }
@@ -72,7 +93,7 @@ const EventProvider = ({ children }) => {
   };
 
   const editEvent = async (data) => {
-    const res = await updateEvent(selectedEvent._id, data);
+    const res = await updateEvent(selectedEvent._id, {...data, notifications: selected.length > 0 ? selected : null}, {headers: {"Authorization": `Bearer ${token}`}});
     const reformatItem = fixDatesAsTimestamps(res.event);
     if (res.success) {
       handleClose();
@@ -82,7 +103,7 @@ const EventProvider = ({ children }) => {
   };
 
   const removeEvent = async () => {
-    const newEvent = await deleteEvent(selectedEvent._id);
+    const newEvent = await deleteEvent(selectedEvent._id, {headers: {"Authorization": `Bearer ${token}`}});
     if (newEvent.success) {
       handleClose();
       init();
@@ -92,18 +113,35 @@ const EventProvider = ({ children }) => {
 
   const init = async () => {
     try {
-      const events = await fetchEvents();
+      const events = await fetchEvents(null, {headers: {"Authorization": `Bearer ${token}`}});
       const newItems = reformatEvents(events);
-      console.log("init: ", newItems);
+      console.log("EventContext.init: ", newItems);
       setEvents(newItems);
     } catch (e) {
-      alert(e);
+      // alert(e);
+      console.log(e)
     }
   };
 
   React.useEffect(() => {
     init();
-  }, []);
+  }, [token]);
+
+  React.useEffect(() => {
+    function populateNotificaitons() {
+      const newNotifications = [];
+      for (let i = 0; i < notifications.length; i++) {
+        const exist = selected.includes(notifications[i]._id);
+        if (exist) {
+          newNotifications.push(notifications[i]);
+        }
+      }
+
+      setSelectedEvent({ ...selectedEvent, notifications: [...newNotifications] });
+    }
+
+    populateNotificaitons();
+  }, [selected]);
 
   return (
     <EventContext.Provider
