@@ -1,7 +1,7 @@
 import axios from "axios";
 require('dotenv').config()
 
-const APP_ENV = process.env.REACT_APP_ENV || 'local-dev';
+const APP_ENV = process.env.REACT_APP_ENV || 'development;
 let HOST = '';
 if (APP_ENV === "development") {
   HOST = "https://ts-dev-api.glootie.ml"
