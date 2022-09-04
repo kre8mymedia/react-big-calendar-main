@@ -72,18 +72,6 @@ export default function ShowEventForm() {
               setSelected={setSelected} 
             />
           </Grid>
-          {/* <Grid item xs={12}>
-            <TextField
-              autoFocus
-              id="name"
-              label="Title"
-              type="email"
-              fullWidth
-              variant="outlined"
-              value={selectedEvent ? selectedEvent.title : null}
-              disabled={true}
-            />
-          </Grid> */}
           <Grid item xs={12}>
             <MDEditor
               value={selectedEvent.description}

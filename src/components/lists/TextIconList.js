@@ -46,6 +46,7 @@ export default function TextIconList() {
                                             </ListItemAvatar>
                                             <ListItemText
                                                 primary={project.name}
+                                                // secondary={<small>{project.totalHours} total hours</small>}
                                             />
                                             <ConfirmationModal action="Delete Project" handleSub={()=>removeProject(project._id)} />
                                         </ListItem>
