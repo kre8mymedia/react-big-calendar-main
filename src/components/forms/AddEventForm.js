@@ -90,6 +90,7 @@ export default function AddEventForm() {
           </Grid>
           <Grid item xs={12}>
             <MDEditor
+              height={300}
               value={description}
               onChange={setDesc}
             />
