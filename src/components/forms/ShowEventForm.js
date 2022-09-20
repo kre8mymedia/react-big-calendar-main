@@ -59,10 +59,10 @@ export default function ShowEventForm() {
       </DialogTitle>
       <DialogContent>
         <Grid container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item md={6} xs={12}>
             <SelectProject disabled={true} />
           </Grid>
-        <Grid item xs={6}>
+        <Grid item md={6} xs={12}>
             <MultipleSelect
               disabled={true} 
               items={notifications} 
@@ -83,29 +83,23 @@ export default function ShowEventForm() {
               // onChange={setDesc}
             />
           </Grid>
-          <Grid item xs={6}>
-            <div className="container">
-              <div className="material-textfield">
-                <input
-                  disabled
-                  value={selectedEvent ? selectedEvent.start : null}
-                  type="datetime-local"
-                />
-                <label>Start</label>
-              </div>
-            </div>
+          <Grid item md={6} xs={12}>
+            <TextField
+              type="datetime-local"
+              fullWidth
+              variant="outlined"
+              disabled
+              value={selectedEvent ? selectedEvent.start : null}
+            />
           </Grid>
-          <Grid item xs={6}>
-            <div className="container">
-              <div className="material-textfield">
-                <input
-                  disabled
-                  value={selectedEvent ? selectedEvent.end : null}
-                  type="datetime-local"
-                />
-                <label>End</label>
-              </div>
-            </div>
+          <Grid item md={6} xs={12}>
+            <TextField
+              type="datetime-local"
+              fullWidth
+              variant="outlined"
+              disabled
+              value={selectedEvent ? selectedEvent.end : null}
+            />
           </Grid>
         </Grid>
       </DialogContent>
