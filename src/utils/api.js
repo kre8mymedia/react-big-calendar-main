@@ -4,7 +4,8 @@ require('dotenv').config()
 const APP_ENV = process.env.REACT_APP_ENV;
 const HOST =
   APP_ENV === "development"
-    ? "https://ts-dev-api.glootie.ml"
+    // ? "https://ts-dev-api.glootie.ml"
+    ? "http://localhost:8000"
     : "https://ts-prod-api.glootie.ml";
 
 // axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;

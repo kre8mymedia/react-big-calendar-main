@@ -72,10 +72,10 @@ export default function UpdateEventForm() {
           This modal shows the event details..
         </DialogContentText>
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item md={6} xs={12}>
             <SelectProject disabled={false} />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item md={6} xs={12}>
             <MultipleSelect 
               disabled={false}
               items={notifications} 
@@ -104,29 +104,24 @@ export default function UpdateEventForm() {
               onChange={setDesc}
             />
           </Grid>
-          <Grid item xs={6}>
-            <div className="container">
-              <div className="material-textfield">
-                <input
-                  value={start ? start : ""}
-                  onChange={(e) => setStart(e.target.value)}
-                  type="datetime-local"
-                />
-                <label>Start</label>
-              </div>
-            </div>
+          <Grid item md={6} xs={12}>
+            <TextField
+              type="datetime-local"
+              fullWidth
+              variant="outlined"
+              value={start ? start : ""}
+              onChange={(e) => setStart(e.target.value)}
+            />
           </Grid>
-          <Grid item xs={6}>
-            <div className="container">
-              <div className="material-textfield">
-                <input
-                  value={end ? end : ""}
-                  onChange={(e) => setEnd(e.target.value)}
-                  type="datetime-local"
-                />
-                <label>End</label>
-              </div>
-            </div>
+          <Grid item md={6} xs={12}>
+            <label>End</label>
+            <TextField
+              type="datetime-local"
+              fullWidth
+              variant="outlined"
+              value={end ? end : ""}
+              onChange={(e) => setEnd(e.target.value)}
+            />
           </Grid>
         </Grid>
       </DialogContent>

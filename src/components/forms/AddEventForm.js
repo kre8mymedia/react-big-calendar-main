@@ -62,10 +62,10 @@ export default function AddEventForm() {
           This modal is used for creating new calendar events.
         </DialogContentText>
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item md={6} xs={12}>
             <SelectProject disabled={false} />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item md={6} xs={12}>
             <MultipleSelect
               disabled={false} 
               items={notifications} 
@@ -95,29 +95,23 @@ export default function AddEventForm() {
               onChange={setDesc}
             />
           </Grid>
-          <Grid item xs={6}>
-            <div className="container">
-              <div className="material-textfield">
-                <input
-                  value={start || ""}
-                  onChange={(e) => setStart(e.target.value)}
-                  type="datetime-local"
-                />
-                <label>Start</label>
-              </div>
-            </div>
+          <Grid item md={6} xs={12}>
+            <TextField
+              type="datetime-local"
+              fullWidth
+              variant="outlined"
+              value={start || ""}
+              onChange={(e) => setStart(e.target.value)}
+            />
           </Grid>
-          <Grid item xs={6}>
-            <div className="container">
-              <div className="material-textfield">
-                <input
-                  value={end || ""}
-                  onChange={(e) => setEnd(e.target.value)}
-                  type="datetime-local"
-                />
-                <label>End</label>
-              </div>
-            </div>
+          <Grid item md={6} xs={12}>
+            <TextField
+              type="datetime-local"
+              fullWidth
+              variant="outlined"
+              value={end || ""}
+              onChange={(e) => setEnd(e.target.value)}
+            />
           </Grid>
         </Grid>
       </DialogContent>
