@@ -1,4 +1,4 @@
-# React Big Calendar with Material UI
+# React Big Calendar with Material UI ---
 
 ### Table of Contents
 
